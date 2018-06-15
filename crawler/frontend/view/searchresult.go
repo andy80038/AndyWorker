@@ -1,0 +1,20 @@
+package view
+
+import (
+	"html/template"
+	"io"
+	"github.com/andy80038/AndyWorker/crawler/frontend/model"
+)
+
+type SearchResultView struct {
+	template *template.Template
+}
+
+func CteateSearchResultView(filename string) SearchResultView{
+	return SearchResultView{
+		template:template.Must(template.ParseFiles(filename)),
+	}
+}
+func (s SearchResultView)Render( w io.Writer,data model.SearchResult)error{
+	return  s.template.Execute(w,data)
+}
